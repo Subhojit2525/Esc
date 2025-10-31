@@ -6,16 +6,17 @@ import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import RecipeContext from './context/RecipeContext.jsx';
+import RecipeProvider from "./context/RecipeContext.jsx";
+
 
 
 createRoot(document.getElementById('root')).render(
-  <RecipeContext>
+  <RecipeProvider>
     <BrowserRouter>
       <App />
       <ToastContainer/>
     </BrowserRouter>
-  </RecipeContext>
+  </RecipeProvider>
 
 
 );

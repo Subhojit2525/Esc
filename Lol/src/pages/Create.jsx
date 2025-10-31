@@ -5,11 +5,16 @@
 import { useForm } from "react-hook-form"
 import { nanoid } from "nanoid";
 import { useContext } from "react";
-import {recipecontext} from "../context/RecipeContext";
+import {RecipeContext} from "../context/RecipeContext";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 
 const Create = () => {
-   const {data,setdata} = useContext(recipecontext)
+   const navigate = useNavigate();
+   const {data,setdata} = useContext(RecipeContext)
     const { register, handleSubmit,reset } = useForm();
 
 
@@ -20,7 +25,9 @@ const Create = () => {
         const copydata = [...data];
         copydata.push(recipe);
         setdata(copydata);
+        toast.success("New recipe created!");
         reset();
+        navigate("/recipes");
     }
     return (
         <form onSubmit={handleSubmit(SubmitHandler)}>
@@ -48,7 +55,7 @@ const Create = () => {
 
             <textarea
                 className="block border-b outline-0 p-2"
-                {...register("description")}
+                {...register("desc")}
                 placeholder="//start from here"
             ></textarea>
 
@@ -56,7 +63,7 @@ const Create = () => {
 
             <textarea
                 className="block border-b outline-0 p-2"
-                {...register("ingredients")}
+                {...register("ingr")}
                 placeholder="//write ingredients seperated by comma"
             ></textarea>
 
@@ -64,7 +71,7 @@ const Create = () => {
 
             <textarea
                 className="block border-b outline-0 p-2"
-                {...register("instruction")}
+                {...register("inst")}
                 placeholder="//write instruction seperated by comma"
             ></textarea>
 
@@ -73,9 +80,9 @@ const Create = () => {
                 {...register("category")}
 
             >
-                <option value="cat-1">Category 1</option>
-                <option value="cat-2">Category 2</option>
-                <option value="cat-3">Category 3</option>
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
 
             </select>
 
