@@ -1,5 +1,6 @@
-import React from 'react'
+
 import { NavLink } from 'react-router-dom'
+
 
 const Navbar = () => {
   return (
@@ -34,6 +35,13 @@ const Navbar = () => {
         to="/create-recipe"
       >
         Create Recipe
+      </NavLink>
+
+      <NavLink
+        className={(e) => (e.isActive ? "text-red-300" : undefined)}
+        to="/fav"
+      >
+        Favroites
       </NavLink>
 
     </div>

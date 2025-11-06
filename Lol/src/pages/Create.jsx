@@ -1,11 +1,9 @@
 
 
-
-
 import { useForm } from "react-hook-form"
 import { nanoid } from "nanoid";
 import { useContext } from "react";
-import {RecipeContext} from "../context/RecipeContext";
+import { RecipeContext } from "../context/RecipeContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,18 +11,17 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 const Create = () => {
-   const navigate = useNavigate();
-   const {data,setdata} = useContext(RecipeContext)
-    const { register, handleSubmit,reset } = useForm();
+    const navigate = useNavigate();
+    const { data, setdata } = useContext(RecipeContext)
+    const { register, handleSubmit, reset } = useForm();
 
 
     const SubmitHandler = (recipe) => {
         recipe.id = nanoid();
-        console.log(recipe);
-
         const copydata = [...data];
         copydata.push(recipe);
         setdata(copydata);
+        localStorage.setItem("recipes", JSON.stringify(copydata));
         toast.success("New recipe created!");
         reset();
         navigate("/recipes");
@@ -38,7 +35,7 @@ const Create = () => {
                 placeholder="Enter image Url"
 
             />
-            <small className="text-red-400">This is how the error is shown</small>
+
             <input
                 className="block border-b outline-0 p-2"
                 {...register("title")}
@@ -49,9 +46,8 @@ const Create = () => {
                 className="block border-b outline-0 p-2"
                 {...register("chef")}
                 type="text"
-                placeholder="Recipe Title"
+                placeholder="Recipe Name"
             />
-            <small className="text-red-400">This is how the error is shown</small>
 
             <textarea
                 className="block border-b outline-0 p-2"
@@ -59,7 +55,7 @@ const Create = () => {
                 placeholder="//start from here"
             ></textarea>
 
-            <small className="text-red-400">This is how the error is shown</small>
+
 
             <textarea
                 className="block border-b outline-0 p-2"
@@ -67,26 +63,26 @@ const Create = () => {
                 placeholder="//write ingredients seperated by comma"
             ></textarea>
 
-            <small className="text-red-400">This is how the error is shown</small>
+
 
             <textarea
                 className="block border-b outline-0 p-2"
                 {...register("inst")}
-                placeholder="//write instruction seperated by comma"
+                placeholder="//write instructions seperated by comma"
             ></textarea>
 
             <select
-                className="block border-b outline-0 p-2"
+                className=" block border-b outline-0 p-2"
                 {...register("category")}
 
             >
-                <option value="breakfast">Breakfast</option>
-                <option value="lunch">Lunch</option>
-                <option value="dinner">Dinner</option>
+                <option className="text-black" value="breakfast">Breakfast</option>
+                <option className="text-black" value="lunch">Lunch</option>
+                <option className="text-black " value="dinner">Dinner</option>
 
             </select>
 
-            <small className="text-red-400">This is how the error is shown</small>
+
 
             <button className=" mt-5 block bg-gray-900 px-4 py-2 rounded">Save Recipe</button>
 
